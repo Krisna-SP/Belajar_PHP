@@ -7,10 +7,10 @@
 
 $x = 10;
 if( $x < 20 ) {
-    echo "benar";
+    echo "benar | x=" . $x . " ok";
 } else if($x == 20 ) {
-    echo "bingo!";
+    echo "bingo! | x=" . $x;
 } else {
-    echo "salah";
+    echo "salah | x=" . $x;
 }
 ?>
