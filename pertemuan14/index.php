@@ -49,7 +49,6 @@ if ( isset($_POST["cari"]) ) {
                 <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');">hapus</a>
             </td>
             <th><img src="img/<?= $row["gambar"]; ?>" width="30"></th>
-            <th><?php echo $row["gambar"]; ?></th>
             <td><?= $row["nrp"]; ?></td>
             <td><?= $row["nama"]; ?></td>
             <td><?= $row["email"]; ?></td>

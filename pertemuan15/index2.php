@@ -1,12 +1,19 @@
 <?php
-require 'functions.php';
-$mahasiswa = query("SELECT * FROM mahasiswa");
+// koneksi ke database
+$conn = mysqli_connect("localhost", "root", "toor", "phpdasar");
 
+//ambil data dari table mahasiswa / query data mahasiswa
+$result = mysqli_query($conn, "SELECT * FROM mahasiswa");
 
-// tombol cari ditekan
-if ( isset($_POST["cari"]) ) {
-    $mahasiswa = cari($_POST["keyword"]);
-}
+// ambil data (fetch) mahasiswa dari object result
+// mysqli_fetch_row() // mengembalikan array numerik
+// mysqli_fetch_assoc() // mengembalikan array associative
+// mysqli_fetch_array() // mengembalikan keduanya
+// mysqli_fetch_object()
+
+// while( $mhs = mysqli_fetch_assoc($result) ) {
+//     var_dump($mhs); 
+// }
 ?>
 
 <!DOCTYPE html>
@@ -20,15 +27,6 @@ if ( isset($_POST["cari"]) ) {
 <body>
     <h1>Daftar Mahasiswa</h1>
 
-    <a href="tambah.php">Tambah data mahasiswa</a>
-    <br><br>
-
-    <form action="" method="post">
-        <input type="text" name="keyword" size="25" autofocus placeholder="Masukan Keyword Pencarian.." autocomplete="off">
-        <button type="submit" name="cari">Cari!</button>
-    </form>
-    <br>
-
     <table border="1" cellpadingg="10" cellspacing="0">
         <tr>
             <th>No.</th>
@@ -41,22 +39,21 @@ if ( isset($_POST["cari"]) ) {
         </tr>
 
         <?php $i = 1; ?>
-        <?php foreach( $mahasiswa as $row ) : ?>
+        <?php while( $row = mysqli_fetch_assoc($result) ) : ?>
         <tr>
             <td><?= $i; ?></td>
             <td>
-                <a href="ubah.php?id=<?= $row["id"]; ?>">ubah</a> |
-                <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');">hapus</a>
+                <a href="">ubah</a> |
+                <a href="">hapus</a>
             </td>
             <th><img src="img/<?= $row["gambar"]; ?>" width="30"></th>
-            <th><?php echo $row["gambar"]; ?></th>
             <td><?= $row["nrp"]; ?></td>
             <td><?= $row["nama"]; ?></td>
             <td><?= $row["email"]; ?></td>
             <td><?= $row["jurusan"]; ?></td>
         </tr>
         <?php $i++; ?>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
     </table>
 
 </body>
